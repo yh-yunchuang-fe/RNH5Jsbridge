@@ -1,4 +1,4 @@
-import {makeSingleton} from '../../yh-utils/src/'
+import {makeSingleton} from '../../yh-common-utils/src/'
 
 const instance = makeSingleton(RNH5JsBridge)()
 
