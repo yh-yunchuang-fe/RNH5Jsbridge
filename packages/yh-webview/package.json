@@ -10,11 +10,10 @@
   "license": "ISC",
   "main": "lib/yh-webview.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "src": "src"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

@@ -11,13 +11,12 @@
   "author": "sunhaiyan <15358466693@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/yh-rn-jsbridge.js",
+  "main": "src/index.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "src": "src"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -25,5 +24,8 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "gitHead": "57cc5a6edc0d1c283a40784611a4eb40b82e5e6d"
+  "gitHead": "57cc5a6edc0d1c283a40784611a4eb40b82e5e6d",
+  "dependencies": {
+    "yh-common-utils": "^0.0.6"
+  }
 }
