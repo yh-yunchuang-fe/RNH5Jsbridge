@@ -1,5 +1,5 @@
 {
-  "name": "yh-utils",
+  "name": "yh-common-utils",
   "version": "0.0.5",
   "description": "yh utils gather",
   "keywords": [
@@ -23,5 +23,5 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "gitHead": "2ccb9ce0e9f78d643d1d2a761ab026ec69463152"
+  "gitHead": "0e0f89867991057680435e2d50e14e936ba08daf"
 }

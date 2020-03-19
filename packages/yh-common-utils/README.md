@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-const yhUtils = require('yh-utils');
+const yhUtils = require('yh-common-utils');
 
 // TODO: DEMONSTRATE API
 ```
