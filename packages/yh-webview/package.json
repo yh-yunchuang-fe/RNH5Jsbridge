@@ -8,7 +8,7 @@
   "author": "sunhaiyan <15358466693@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/yh-webview.js",
+  "main": "src/yh-webview.js",
   "directories": {
     "src": "src"
   },
