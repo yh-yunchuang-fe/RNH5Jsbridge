@@ -197,11 +197,13 @@ class YHCamera extends Component {
                     </View>}
                 </View>
                 { cameraType === 'scan' && <ScanMask 
+                    {...this.props}
                     renderScanBar={this.renderScanBar}
                     renderTopView={renderTopView}
                     renderBottomView={renderBottomView}
                     /> }
                 { cameraType === 'photograph' && <OperateBar 
+                    {...this.props}
                     isFront={isFront}
                     portrait={portrait}
                     rflashMode={rflashMode}
