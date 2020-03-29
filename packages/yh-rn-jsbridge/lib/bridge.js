@@ -50,7 +50,7 @@ class RNH5JsBridge {
         window.ReactNativeWebView.postMessage(JSON.stringify({
           type: 'invoke',
           command: command,
-          payload: JSON.stringify(payload),
+          payload: payload,
           callback: !!callback
         }));
       }
@@ -65,7 +65,7 @@ class RNH5JsBridge {
         window.ReactNativeWebView.postMessage(JSON.stringify({
           type: 'call',
           command: command,
-          payload: JSON.stringify(payload),
+          payload: payload,
           callback: !!callback
         }));
       }
