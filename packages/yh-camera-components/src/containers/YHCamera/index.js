@@ -6,7 +6,7 @@ import styles from './style'
 import ScanMask from '../../components/ScanMask'
 import OperateBar from '../../components/OperateBar'
 
-class YHCamera extends Component {
+export default class YHCamera extends Component {
     static defaultProps = {
         mask: null,
         isFront: false,
@@ -15,8 +15,6 @@ class YHCamera extends Component {
         isShowScanBar: true,
         scanBarAnimateTime: 2500,
         onPermissionDenied: null, // 未获得授权使用摄像头
-        permissionDialogTitle: '允许使用相机',
-        permissionDialogMessage: '我们需要你的同意使用相机',
         androidCameraPermissionOptions: {
             title: '允许使用相机',
             message: '我们需要你的同意使用相机',
@@ -52,7 +50,7 @@ class YHCamera extends Component {
 
     // 扫码线移动
     scanBarMove() {
-        const { height = 260, scanBarAnimateTime } = this.props
+        const { height = 255, scanBarAnimateTime } = this.props
         this.state.animatedValue.setValue(0)
         Animated.timing(this.state.animatedValue, {
             toValue: height,
@@ -65,10 +63,10 @@ class YHCamera extends Component {
     onStatusChange = (status) => {
         Toast.hide()
 
-        const {onPermissionDenied} = this.props
+        const {cameraType, onPermissionDenied} = this.props
         const {cameraStatus} = status
 
-        if (cameraStatus === 'NOT_AUTHORIZED') {
+        if (cameraType === 'photograph' && cameraStatus === 'NOT_AUTHORIZED') {
             Alert.alert(
                 '未获得授权使用摄像头',
                 '请前往设置中开启摄像头权限',
@@ -163,14 +161,15 @@ class YHCamera extends Component {
         console.log('😄this.props😄', this.props)
         const { 
             mask,
+            goBack,
             isFront,
             portrait,
             flashMode,
             cameraType,
+            gotoPickCode,
             renderTopView,
             renderBottomView,
-            permissionDialogTitle,
-            permissionDialogMessage,
+            onChangeFlashMode,
             androidCameraPermissionOptions,
         } = this.props
 
@@ -189,19 +188,21 @@ class YHCamera extends Component {
                         onCameraReady={this.onCameraReady} 
                         onMountError={this.onMountError} 
                         onStatusChange={this.onStatusChange}
-                        permissionDialogTitle={permissionDialogTitle} 
-                        permissionDialogMessage={permissionDialogMessage} 
                         androidCameraPermissionOptions={androidCameraPermissionOptions} />
                     {!!mask && <View style={styles.maskWrapper}>
                         {mask}
                     </View>}
+                
+                    { cameraType === 'scan' && <ScanMask 
+                        {...this.props}
+                        goBack={goBack}
+                        gotoPickCode={gotoPickCode}
+                        onChangeFlashMode={onChangeFlashMode}
+                        renderScanBar={this.renderScanBar}
+                        renderTopView={renderTopView}
+                        renderBottomView={renderBottomView}
+                        /> }
                 </View>
-                { cameraType === 'scan' && <ScanMask 
-                    {...this.props}
-                    renderScanBar={this.renderScanBar}
-                    renderTopView={renderTopView}
-                    renderBottomView={renderBottomView}
-                    /> }
                 { cameraType === 'photograph' && <OperateBar 
                     {...this.props}
                     isFront={isFront}
@@ -216,4 +217,3 @@ class YHCamera extends Component {
     }
 }
 
-export default YHCamera

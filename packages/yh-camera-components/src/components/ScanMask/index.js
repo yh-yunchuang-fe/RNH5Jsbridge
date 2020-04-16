@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {View, Dimensions, Animated, StyleSheet} from 'react-native'
+import {View, Text, Dimensions, StyleSheet, TouchableOpacity} from 'react-native'
 import styles from './style'
+import { Icon } from 'gingko'
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window')
 
 export default class ScanMask extends Component {
@@ -17,13 +18,20 @@ export default class ScanMask extends Component {
         cornerSize: 20,
         cornerColor: '#24A8E8',
         cornerBorderWidth: 3,
+        rflashMode: false,
+        goBack: () => {},
+        gotoPickCode: () => {},
+        onChangeFlashMode: () => {}
     }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            animatedValue: new Animated.Value(0)
-        }
+    onChangeFlashMode = () => {
+        const { onChangeFlashMode } = this.props
+        onChangeFlashMode && onChangeFlashMode()
+    }
+
+    gotoPickCode = () => {
+        const { gotoPickCode } = this.props
+        gotoPickCode && gotoPickCode()
     }
     
     render() {
@@ -32,6 +40,8 @@ export default class ScanMask extends Component {
             width = 250, 
             height = 250,
             maskColor,
+            rflashMode,
+            goBack,
             renderScanBar,
             renderTopView,
             renderBottomView,
@@ -39,7 +49,7 @@ export default class ScanMask extends Component {
             borderWidth,
             cornerSize,
             cornerColor,
-            cornerBorderWidth
+            cornerBorderWidth,
         } = this.props
         const maskSty = maskColor ? { backgroundColor: maskColor } : null
         const scanTop = top ? top : (deviceHeight - height) / 2
@@ -56,7 +66,19 @@ export default class ScanMask extends Component {
         return (
             <View style={styles.scanMaskContainer}>
                 <View style={[styles.sideView, maskSty, { height: scanTop }]}>
-                    {renderTopView && renderTopView()}
+                    {
+                        !!renderTopView ? renderTopView() :
+                        <View style={styles.topContainer}>
+                            <View style={styles.btnContainer}>
+                                <TouchableOpacity onPress={goBack}>
+                                    <View style={styles.backBtn}>
+                                        <Icon name='chevron-left' color='#fff' />
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <Text style={styles.topTipText}>将条形码／二维码放入框内</Text>
+                        </View>
+                    }
                 </View>
 
                 <View style={styles.center}>
@@ -72,7 +94,23 @@ export default class ScanMask extends Component {
                 </View>
 
                 <View style={[styles.sideView, maskSty, { height: scanBottom }]}>
-                    {renderBottomView && renderBottomView()}
+                    {
+                        renderBottomView ? renderBottomView() :
+                        <View>
+                            <TouchableOpacity style={styles.lightBtnContainer} onPress={this.onChangeFlashMode}>
+                                <View style={styles.lightBtn}>
+                                    <Icon name={rflashMode ? 'light-on' : 'light-off'} color='#fff' size={28} />
+                                </View>
+                                <Text style={styles.lightBtnText}>{rflashMode ? '关闭手电筒' : '打开手电筒'}</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={this.gotoPickCode}>
+                                <View style={styles.pickCodeButton}>
+                                    <Text style={styles.pickCodeButtonText}>输入提货码</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    }
                 </View>
             </View>
         )

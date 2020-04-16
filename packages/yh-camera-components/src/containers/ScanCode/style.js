@@ -14,7 +14,6 @@ export default StyleSheet.create({
         color: styleVariables.color_base,
         borderColor: styleVariables.border_color,
         paddingHorizontal: 12
-
     },
     button: {
         marginTop: 25

@@ -9,7 +9,7 @@
   "author": "sunhaiyan <15358466693@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "src/yh-camera-components.js",
+  "main": "src/index.js",
   "directories": {
     "src": "src"
   },

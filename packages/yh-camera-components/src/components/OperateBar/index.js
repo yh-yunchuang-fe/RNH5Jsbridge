@@ -21,7 +21,8 @@ export default class OperateBar extends Component {
             isFront,
             portrait,
             rflashMode,
-            onCancel
+            onCancel,
+            takePicture
         } = this.props
 
         return <View style={styles.operateBarContainer}>
@@ -38,7 +39,7 @@ export default class OperateBar extends Component {
                         {transform: [{rotateZ: '90deg'}]}]}>取消</Text>
                 </TouchableOpacity>
             }
-            <TouchableOpacity style={styles.capture} onPress={this.takePicture}>
+            <TouchableOpacity style={styles.capture} onPress={takePicture}>
                 <View style={styles.photoBtn}>
                     <View style={styles.photoSmallCircle}></View>
                 </View>
