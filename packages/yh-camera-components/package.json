@@ -9,12 +9,12 @@
   "author": "sunhaiyan <15358466693@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "directories": {
-    "src": "src"
+    "lib": "lib"
   },
   "files": [
-    "src"
+    "lib"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
