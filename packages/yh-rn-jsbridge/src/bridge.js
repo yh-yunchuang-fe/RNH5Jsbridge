@@ -14,12 +14,26 @@ class RNH5JsBridge {
             this.appName = params.appName
         }
 
-        window.afterReceiveMessage = (messgae) => {
-            jsBridge.afterReceiveMessage(messgae)
+        window.afterReceiveMessage = function (message){
+            this.afterReceiveMessage(message)
         }
     }
 
     afterReceiveMessage = (data) => {
+        let command = data.command
+        let payload = data.payload
+
+        if(this.eventArr.indexOf(command) < 0) {return}
+        //todo func类型检查
+        const handlersObj = this.handlers[command]
+        if(!handlersObj) {return}
+        this.handlers[command]['callback'](payload)
+        if(handlersObj.once) {
+            this.off(command)
+        }
+    }
+
+    invoke = (command, payload, callback) => {
         if (window.ReactNativeWebView) {
             if(callback) {
                 this.once(command, callback)
@@ -27,28 +41,21 @@ class RNH5JsBridge {
             window.ReactNativeWebView.postMessage(JSON.stringify({
                 type: 'invoke',
                 command: command,
-                payload: JSON.stringify(params)
-            }))
-        }
-    }
-
-    invoke = (command, params) => {
-        if (window.postMessage) {
-            window.postMessage(JSON.stringify({
-                type: 'invoke',
-                command: command,
-                payload: params,
+                payload: payload,
                 callback: !!callback
             }))
         }
     }
 
-    call = (command, params) => {
-        if (window.postMessage) {
-            window.postMessage(JSON.stringify({
+    call = (command, payload, callback) => {
+        if (window.ReactNativeWebView) {
+            if(callback) {
+                this.once(command, callback)
+            }
+            window.ReactNativeWebView.postMessage(JSON.stringify({
                 type: 'call',
                 command: command,
-                payload: params,
+                payload: payload,
                 callback: !!callback
             }))
         }
