@@ -1,6 +1,6 @@
 {
   "name": "yh-rn-jsbridge",
-  "version": "0.0.17-alpha.0",
+  "version": "0.0.18-alpha.0",
   "description": "yh rn h5 jsbridge",
   "keywords": [
     "yh",
@@ -26,6 +26,6 @@
   },
   "gitHead": "57cc5a6edc0d1c283a40784611a4eb40b82e5e6d",
   "dependencies": {
-    "yh-common-utils": "^0.0.12-alpha.0"
+    "yh-common-utils": "^0.0.18-alpha.0"
   }
 }

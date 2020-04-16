@@ -1,6 +1,6 @@
 {
   "name": "yh-camera-components",
-  "version": "0.0.11-alpha.0",
+  "version": "0.0.18-alpha.0",
   "description": "common camera pages and components",
   "keywords": [
     "camera",
@@ -9,12 +9,12 @@
   "author": "sunhaiyan <15358466693@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "directories": {
-    "src": "src"
+    "lib": "lib"
   },
   "files": [
-    "src"
+    "lib"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
