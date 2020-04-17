@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { View, ScrollView, Keyboard, TextInput } from 'react-native'
 import { Button } from 'gingko'
-import { Header } from '@/components'
+import { Header } from 'yh-durian'
 import styleVariables from '../../assets/style/variables'
 import styles from './style'
 
