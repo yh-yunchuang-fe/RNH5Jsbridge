@@ -1,31 +1,19 @@
 import React, {Component} from 'react'
-import { ScrollView, Keyboard } from 'react-native'
+import { View, ScrollView, Keyboard, TextInput } from 'react-native'
 import { Button } from 'gingko'
 import { Header } from '@/components'
 import styleVariables from '../../assets/style/variables'
 import styles from './style'
 
 export default class ScanCode extends Component {
-    constructor(props) {
-        super(props) 
-        this.state = {
-            pickCode: props.pickCode || ''
-        }
-    }
-
-    componentWillUnmount() {
-        this.setState({
-            pickCode: ''
-        })
-    }
-
-    onChangeTextInput = (val) => {
-        const { onChangeTextInput } = this.props
-        onChangeTextInput && onChangeTextInput(val)
+    onChangeText = (val) => {
+        const { onChangeText } = this.props
+        onChangeText && onChangeText(val)
     }
 
     onSubmit = async () => {
         Keyboard.dismiss()
+        
         const { onSubmit } = this.props
         onSubmit && onSubmit()
     }
@@ -33,18 +21,18 @@ export default class ScanCode extends Component {
     render() {
         const {pickCode, pickCodeSubmiting} = this.props
 
-        return <View>
+        return <View style={styles.scanCodeContainer}>
             <Header>输入提货码</Header>
             <ScrollView
-                style={styles.container}
+                style={styles.scanCodeContent}
                 keyboardShouldPersistTaps='handled'
                 bounces={false}>
-                <TextInputpickCodeSubmiting
+                <TextInput
                     value={pickCode}
                     style={styles.textInput}
                     placeholder='输入提货码'
                     placeholderTextColor={styleVariables.placeholder_color}
-                    onChangeText={this.onChangeTextInput}/>
+                    onChangeText={this.onChangeText}/>
                 <Button
                     style={styles.button}
                     type='primary'

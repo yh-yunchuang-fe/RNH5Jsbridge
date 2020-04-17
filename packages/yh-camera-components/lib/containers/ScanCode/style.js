@@ -2,7 +2,10 @@ import {StyleSheet} from 'react-native'
 import styleVariables from '../../assets/style/variables'
 
 export default StyleSheet.create({
-    container: {
+    scanCodeContainer: {
+        flex: 1,
+    },
+    scanCodeContent: {
         flex: 1,
         paddingTop: 25,
         paddingHorizontal: 40
