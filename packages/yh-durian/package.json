@@ -1,0 +1,32 @@
+{
+  "name": "yh-durian",
+  "version": "0.0.18-alpha.0",
+  "description": "yn rn common business components",
+  "keywords": [
+    "yh",
+    "rn",
+    "common",
+    "business",
+    "components"
+  ],
+  "author": "sunhaiyan <15358466693@163.com>",
+  "homepage": "https://github.com/yh-yunchuang-fe/RNH5Jsbridge#readme",
+  "license": "ISC",
+  "main": "lib/yh-durian.js",
+  "directories": {
+    "lib": "lib",
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yh-yunchuang-fe/RNH5Jsbridge.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/yh-yunchuang-fe/RNH5Jsbridge/issues"
+  }
+}
