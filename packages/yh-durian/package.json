@@ -14,7 +14,7 @@
   "license": "ISC",
   "main": "lib/yh-durian.js",
   "directories": {
-    "lib": "lib",
+    "lib": "lib"
   },
   "files": [
     "lib"
