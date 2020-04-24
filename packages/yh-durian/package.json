@@ -24,9 +24,12 @@
     "url": "git+https://github.com/yh-yunchuang-fe/RNH5Jsbridge.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "../../node_modules/.bin/babel --root-mode upward src -d lib --extensions .js && ../../node_modules/.bin/babel --root-mode upward src -d lib --extensions .ts && ../../node_modules/.bin/babel --root-mode upward src -d lib --extensions .tsx"
   },
   "bugs": {
     "url": "https://github.com/yh-yunchuang-fe/RNH5Jsbridge/issues"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.9.0"
   }
 }
