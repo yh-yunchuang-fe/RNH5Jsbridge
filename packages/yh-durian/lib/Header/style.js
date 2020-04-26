@@ -1,24 +1,12 @@
-"use strict";
+import { StyleSheet } from 'react-native'; // @ts-ignore
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+import { isIOS, getStatusBarHeight } from '@lib/screenUtils'; // @ts-ignore
 
-var _reactNative = require("react-native");
-
-var _screenUtils = require("@lib/screenUtils");
-
-var _variables = _interopRequireDefault(require("@style/variables"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-// @ts-ignore
-// @ts-ignore
-var _default = _reactNative.StyleSheet.create({
+import variables from '@style/variables';
+export default StyleSheet.create({
   header: {
-    paddingTop: (0, _screenUtils.isIOS)() ? (0, _screenUtils.getStatusBarHeight)() : 0,
-    backgroundColor: _variables["default"].header_bg,
+    paddingTop: isIOS() ? getStatusBarHeight() : 0,
+    backgroundColor: variables.header_bg,
     borderBottomWidth: 1,
     borderBottomColor: '#DDD'
   },
@@ -43,10 +31,8 @@ var _default = _reactNative.StyleSheet.create({
   title: {
     flex: 1,
     paddingHorizontal: 35,
-    fontSize: _variables["default"].title_font_size,
-    color: _variables["default"].color_base,
+    fontSize: variables.title_font_size,
+    color: variables.color_base,
     textAlign: 'center'
   }
 });
-
-exports["default"] = _default;

@@ -1,35 +1,62 @@
-import React, {Component} from 'react';
-import { WebView } from 'react-native-webview';
+import React, {Component} from 'react'
+import {BackHandler} from 'react-native'
+import { WebView } from 'react-native-webview'
 import {
-    Text,
-    Button,
-    SafeAreaView
-} from 'react-native';
-
+    SafeAreaView,
+} from 'react-native'
+import {Header, Track, Scanner} from 'yh-durian'
 import styles from './style'
 
 class CommonWebview extends Component {
     static defaultProps = {
-        needHeader: true,
-        getRef: null
+        needHeader: false,
+        getRef: null,
+        wrapperStyle: null,
+        headProps: null,
     }
 
     static sendMessage = (webview, command, payload) => {
         webview.injectJavaScript(`afterReceiveMessage(${(JSON.stringify({
             command: command,
-            payload: JSON.stringify(payload)
+            payload: payload
         }))});true;`)
     }
 
     constructor(props) {
-        const {navigation} = props
         super(props)
-        if(!props.needHeader) {
-            navigation.setOptions({
-                headerMode: 'none',
-                headerShown: false
-            })
+        
+        this.state = {
+            title: '我是webview',
+            canGoBackRn: true,
+            backNoEffect: false
         }
+    }
+
+    componentDidMount = () => {
+        BackHandler.addEventListener('hardwareBackPress', this.goBack)
+    }
+
+    componentWillUnmount = () => {
+        this.tracker = null
+        Scanner.stopScan()
+        BackHandler.removeEventListener('hardwareBackPress', this.goBack)
+    }
+
+    onReceiveScanResult = (data) => {
+        CommonWebview.sendMessage(this.webview, 'codeScan', data)
+    }
+
+    goBack = () => {
+        const {backNoEffect} = this.state
+        if(backNoEffect) {return true}
+        const {close} = this.props
+        if (this.state.canGoBackRn) {
+            Scanner.stopScan()
+            close && close()
+            return true
+        }
+        this.webview.goBack()
+        return true
     }
 
     generateRef = (ref) => {
@@ -41,9 +68,7 @@ class CommonWebview extends Component {
 
     onLoad = (syntheticEvent) => {
         const {onLoad} = this.props
-        this.webview.injectJavaScript(`afterReceiveMessage(${(JSON.stringify({
-            command: 'ready',
-        }))});true;`)
+        CommonWebview.sendMessage(this.webview, 'ready')
         onLoad && onLoad(syntheticEvent.nativeEvent)
     }
 
@@ -57,14 +82,12 @@ class CommonWebview extends Component {
         const command = message.command //&& message.command.toUpperCase()
         const payload = message.payload
         const callback = message.callback
-        alert(type)
         if(type == 'invoke') {
             this.handleInvokeEvents(command, payload, callback)
             return
         }
 
         if(type == 'call') {
-            alert('enter call')
             this.handleCallEvents(command, payload, callback)
             return
         }
@@ -76,49 +99,76 @@ class CommonWebview extends Component {
 
     handleInvokeEvents = (command, payload, callback) => {
         switch(command) {
-            case 'openPortraitFrontCamera':
-                //to do
-                !!callback && CommonWebview.sendMessage(this.webview, command, 'hahah')
-                break
-            case 'openPortraitBackCamera':
-                break
-            case 'openLandscapeFrontCamera':
-                break
-            case 'openLandscapeBackCamera':
-                break
-            case 'addTrackProperty':
-                break
-            case 'addTrackEvent':
-                break
-            default:
-                break    
+        case 'openPortraitFrontCamera':
+            //to do
+            !!callback && CommonWebview.sendMessage(this.webview, command, 'hahah')
+            break
+        case 'openPortraitBackCamera':
+            break
+        case 'openLandscapeFrontCamera':
+            break
+        case 'openLandscapeBackCamera':
+            break
+        case 'addTrackProperty':
+            break
+        case 'addTrackEvent':
+            break
+        case 'startScan':
+            Scanner.setOnReceiveScanResule(this.onReceiveScanResult)
+            Scanner.startScan()
+            !!callback && CommonWebview.sendMessage(this.webview, command)
+            break
+        case 'stopScan':
+            Scanner.stopScan()
+            break
+        case 'initTrack':
+            this.tracker = Track.getInstance(payload)
+            break;
+        case 'setPresetProperty':
+            if(!this.tracker) {return}
+            this.tracker.savePresetProperty(payload)
+            break;
+        case 'setMultiPresetProperty':
+            if(!this.tracker) {return}
+            this.tracker.saveMultiPresetProperty(payload)
+            break;
+        case 'addTrack':
+            if(!this.tracker) {return}
+            const {trackName='unknow', ...restProps} = payload
+            this.tracker.addTrack(trackName, restProps)
+            break;
+        default:
+            break    
         }
     }
 
     handleCallEvents = (command, payload, callback) => {
         switch(command) {
-            case 'showHeaderRight':
-                this.setHeaderRight(payload, callback)
-                break
-            case 'goBackRn':
-                break
-            case 'changeTitle':
-                this.setTitle(payload)
-                break
-            default:
-                break    
+        case 'goBackRn':
+            this.setState({
+                canGoBackRn: payload
+            })
+            break
+        case 'setBackEffect':
+            this.setState({
+                backNoEffect: payload
+            })
+            break
+        case 'changeTitle':
+            this.setState({
+                title: payload
+            })
+            break
+        case 'close':
+            this.props.close && this.props.close()
+            break
+        case 'onTokenOut':
+            this.props.onTokenOut && this.props.onTokenOut()
+            break
+        default:
+            this.props.onCallMessage && this.props.onCallMessage(command, payload, callback)
+            break    
         }
-    }
-
-    setHeaderRight = (title, callback) => {
-        const {navigation} = this.props
-
-        navigation.setOptions({
-            headerRight: () => (
-                callback ? <Button onPress={this.onPressHeaderRightBtn} title={title} /> :
-                <Text style={styles.headerRightText}>{title}</Text>
-            ),
-        })
     }
 
     setTitle = (title) => {
@@ -128,25 +178,23 @@ class CommonWebview extends Component {
         })
     }
 
-    onPressHeaderRightBtn = () => {
-        CommonWebview.sendMessage('headerRightClick')
-    }
-
     render() {
         const {
             needHeader,
-            getRef,
             source,
             wrapperStyle,
             style,
+            headProps,
             ...restProps
         } = this.props
+        const {title} = this.state
         return <SafeAreaView style={[styles.containerStyle, wrapperStyle]}>
-            <WebView 
+            {needHeader && <Header onBack={this.goBack} {...headProps}>{title}</Header>}
+            <WebView
                 {...restProps}
                 ref={this.generateRef}
                 style={[styles.containerStyle, style]}
-                source={{uri: 'http://0.0.0.0:8000/'}}
+                source={{uri: source}}
                 onMessage={this.onMessage}
                 onLoad={this.onLoad}
             />
@@ -154,7 +202,8 @@ class CommonWebview extends Component {
     }
 }
 
-export default {
-    CommonWebview: CommonWebview,
-    sendMessage: CommonWebview.sendMessage
+const sendMessage = CommonWebview.sendMessage
+export {
+    sendMessage 
 }
+export default CommonWebview

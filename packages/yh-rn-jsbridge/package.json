@@ -22,7 +22,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "../../node_modules/.bin/babel --root-mode upward src -d lib"
   },
   "gitHead": "57cc5a6edc0d1c283a40784611a4eb40b82e5e6d",
   "dependencies": {
