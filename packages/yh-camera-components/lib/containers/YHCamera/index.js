@@ -134,10 +134,9 @@ export default class YHCamera extends Component {
             ]
         }
         if (isShowScanBar) {
-            let scanBarDom = null
-            if (React.isValidElement(scanBar)) {
-                scanBarDom = scanBar
-            } else {
+            let scanBarDom = scanBar && scanBar()
+            
+            if (!React.isValidElement(scanBarDom)) {
                 scanBarDom = (<Image style={styles.scanBar} source={require('../../assets/imgs/scan-line-blue.png')}/>)
             }
             return (<Animated.View style={animatedStyle}>
@@ -190,7 +189,7 @@ export default class YHCamera extends Component {
                         onStatusChange={this.onStatusChange}
                         androidCameraPermissionOptions={androidCameraPermissionOptions} />
                     {!!mask && <View style={styles.maskWrapper}>
-                        {mask}
+                        {mask()}
                     </View>}
                 
                     { cameraType === 'scan' && <ScanMask 
