@@ -9,7 +9,7 @@
     "business",
     "components"
   ],
-  "author": "sunhaiyan <15358466693@163.com>",
+  "author": "yh-rn",
   "homepage": "https://github.com/yh-yunchuang-fe/RNH5Jsbridge#readme",
   "license": "ISC",
   "main": "lib/yh-durian.js",
@@ -31,5 +31,6 @@
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.9.0"
-  }
+  },
+  "gitHead": "260fe91b658a993c46a6dfe0a3d8d2979705817b"
 }

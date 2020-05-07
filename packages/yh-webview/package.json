@@ -5,7 +5,7 @@
   "keywords": [
     "webview"
   ],
-  "author": "sunhaiyan <15358466693@163.com>",
+  "author": "yh-rn",
   "homepage": "https://github.com/yh-yunchuang-fe/RNH5Jsbridge#readme",
   "license": "ISC",
   "main": "src/yh-webview.js",
@@ -15,9 +15,6 @@
   "files": [
     "src"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
@@ -30,5 +27,6 @@
   },
   "bugs": {
     "url": "https://github.com/yh-yunchuang-fe/RNH5Jsbridge/issues"
-  }
+  },
+  "gitHead": "260fe91b658a993c46a6dfe0a3d8d2979705817b"
 }
