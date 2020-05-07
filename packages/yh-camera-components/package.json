@@ -1,6 +1,6 @@
 {
   "name": "@yh-rn/yh-camera-components",
-  "version": "0.1.4-alpha.0",
+  "version": "0.1.4",
   "description": "common camera pages and components",
   "keywords": [
     "camera",
@@ -28,6 +28,5 @@
   },
   "dependencies": {
     "yh-durian": "^0.1.3-alpha.0"
-  },
-  "devDependencies": {}
+  }
 }
