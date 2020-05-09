@@ -15,6 +15,8 @@ export default class YHCamera extends Component {
         isShowScanBar: true,
         scanBarAnimateTime: 2500,
         onPermissionDenied: null, // 未获得授权使用摄像头
+        permissionDialogTitle: '允许使用相机',
+        permissionDialogMessage: '我们需要你的同意使用相机',
         androidCameraPermissionOptions: {
             title: '允许使用相机',
             message: '我们需要你的同意使用相机',
@@ -169,6 +171,8 @@ export default class YHCamera extends Component {
             renderTopView,
             renderBottomView,
             onChangeFlashMode,
+            permissionDialogTitle,
+            permissionDialogMessage,
             androidCameraPermissionOptions,
         } = this.props
 
@@ -187,6 +191,8 @@ export default class YHCamera extends Component {
                         onCameraReady={this.onCameraReady} 
                         onMountError={this.onMountError} 
                         onStatusChange={this.onStatusChange}
+                        permissionDialogTitle={permissionDialogTitle} 
+                        permissionDialogMessage={permissionDialogMessage} 
                         androidCameraPermissionOptions={androidCameraPermissionOptions} />
                     {!!mask && <View style={styles.maskWrapper}>
                         {mask()}
@@ -195,6 +201,7 @@ export default class YHCamera extends Component {
                     { cameraType === 'scan' && <ScanMask 
                         {...this.props}
                         goBack={goBack}
+                        rflashMode={!!rflashMode}
                         gotoPickCode={gotoPickCode}
                         onChangeFlashMode={onChangeFlashMode}
                         renderScanBar={this.renderScanBar}
@@ -206,7 +213,7 @@ export default class YHCamera extends Component {
                     {...this.props}
                     isFront={isFront}
                     portrait={portrait}
-                    rflashMode={rflashMode}
+                    rflashMode={!!rflashMode}
                     onCancel={this.onCancel}
                     takePicture={this.takePicture}
                     onChangeFlashMode={this.onChangeFlashMode}
