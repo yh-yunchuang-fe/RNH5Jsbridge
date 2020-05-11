@@ -18,6 +18,7 @@ export default class Light extends Component {
     
     render() {
         const { 
+            style,
             lightStyle,
             rflashMode,
             flashModeText,
@@ -25,7 +26,7 @@ export default class Light extends Component {
         } = this.props
 
         return <TouchableOpacity style={lightContainerStyle} onPress={this.onChangeFlashMode}>
-            <View style={[styles.lightBtn, lightStyle]}>
+            <View style={[styles.lightBtn, lightStyle, style]}>
                 <Icon name={rflashMode ? 'light-on' : 'light-off'} color='#fff' size={28} />
             </View>
             {
