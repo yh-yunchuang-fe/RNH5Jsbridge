@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { View, Animated, Alert, Easing, Image } from 'react-native'
+import {View, Animated, Alert, Easing, Image} from 'react-native'
 import { Toast } from 'gingko'
 import { RNCamera } from 'react-native-camera'
 import styles from './style'
