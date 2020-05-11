@@ -96,15 +96,6 @@ export default class YHCamera extends Component {
         onCameraReady && onCameraReady()
     }
 
-    // 点击手电筒
-    onChangeFlashMode = () => {
-        const {flashMode, onChangeFlashMode} = this.props
-
-        if (!!onChangeFlashMode) {
-            onChangeFlashMode(!flashMode)
-        }
-    }
-
     // 图像生成
     takePicture = async () => {
         const {beforeTakePhoto, afterTakePhoto, onTakePhoto} = this.props
@@ -216,7 +207,7 @@ export default class YHCamera extends Component {
                     rflashMode={!!rflashMode}
                     onCancel={this.onCancel}
                     takePicture={this.takePicture}
-                    onChangeFlashMode={this.onChangeFlashMode}
+                    onChangeFlashMode={onChangeFlashMode}
                     />}
             </View>
         )

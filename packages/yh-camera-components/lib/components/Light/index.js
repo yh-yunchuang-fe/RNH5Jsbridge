@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, TouchableOpacity, Text, Alert} from 'react-native'
+import {View, TouchableOpacity, Text} from 'react-native'
 import {Icon} from 'gingko'
 import styles from './style'
 
@@ -7,7 +7,8 @@ export default class Light extends Component {
     static defaultProps = {
         style: {},
         isLighting: false,
-        islightText: false
+        islightText: false,
+        onChangeFlashMode: () => {}
     }
 
     onChangeFlashMode = () => {
