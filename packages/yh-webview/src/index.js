@@ -4,7 +4,7 @@ import { WebView } from 'react-native-webview'
 import {
     SafeAreaView,
 } from 'react-native'
-import {Header, Track, Scanner} from 'yh-durian'
+import {Header, Track, Scanner} from '@yh-rn/yh-durian'
 import styles from './style'
 
 class CommonWebview extends Component {

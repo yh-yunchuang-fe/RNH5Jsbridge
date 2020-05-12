@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { Icon } from 'gingko';
+import { Icon } from '@yh-rn/gingko';
 import styles from './style';
 import { withNavigation } from 'react-navigation';
 

@@ -19,7 +19,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "yh-durian": "^0.1.3-alpha.0"
+    "@yh-rn/yh-durian": "^0.1.6-alpha.0"
   },
   "repository": {
     "type": "git",
