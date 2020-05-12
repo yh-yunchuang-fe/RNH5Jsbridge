@@ -1,6 +1,6 @@
 {
   "name": "@yh-rn/yh-webview",
-  "version": "0.1.16-alpha.0",
+  "version": "0.1.17-alpha.0",
   "description": "yh rn h5 common webview",
   "keywords": [
     "webview"
@@ -19,7 +19,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@yh-rn/yh-durian": "^0.1.6-alpha.0"
+    "@yh-rn/yh-durian": "^0.1.17-alpha.0"
   },
   "repository": {
     "type": "git",
