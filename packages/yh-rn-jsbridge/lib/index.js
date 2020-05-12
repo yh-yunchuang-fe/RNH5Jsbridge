@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _yhCommonUtils = require("yh-common-utils");
+var _yhCommonUtils = require("@yh-rn/yh-common-utils");
 
 var _bridge = _interopRequireDefault(require("./bridge"));
 
