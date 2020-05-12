@@ -7,13 +7,7 @@ export default class OperateBar extends Component {
     static defaultProps = {
         portrait: true,
         flashMode: false,
-        onCancel: null,
-        onChangeFlashMode: null,
-    }
-
-    onChangeFlashMode = () => {
-        const { onChangeFlashMode } = this.props
-        onChangeFlashMode && onChangeFlashMode()
+        onCancel: () => {},
     }
     
     render() {
@@ -22,6 +16,7 @@ export default class OperateBar extends Component {
             portrait,
             rflashMode,
             onCancel,
+            onChangeFlashMode,
             takePicture
         } = this.props
 
@@ -32,7 +27,7 @@ export default class OperateBar extends Component {
                 </TouchableOpacity> : portrait ? 
                 <Light 
                     rflashMode={rflashMode} 
-                    changeLightState={this.onChangeFlashMode}/> 
+                    onChangeFlashMode={onChangeFlashMode}/> 
                     : 
                 <TouchableOpacity onPress={onCancel}>
                     <Text style={[styles.cancelText, styles.cancelBtnWrapper,
@@ -55,7 +50,7 @@ export default class OperateBar extends Component {
                 <Light 
                     style={{transform: [{rotateZ: '90deg'}]}}
                     rflashMode={rflashMode} 
-                    changeLightState={this.onChangeFlashMode}/> 
+                    onChangeFlashMode={onChangeFlashMode}/> 
             }
         </View>
     }

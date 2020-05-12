@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, TouchableOpacity, Text, Alert} from 'react-native'
+import {View, TouchableOpacity, Text} from 'react-native'
 import {Icon} from 'gingko'
 import styles from './style'
 
@@ -7,7 +7,8 @@ export default class Light extends Component {
     static defaultProps = {
         style: {},
         isLighting: false,
-        islightText: false
+        islightText: false,
+        onChangeFlashMode: () => {}
     }
 
     onChangeFlashMode = () => {
@@ -17,6 +18,7 @@ export default class Light extends Component {
     
     render() {
         const { 
+            style,
             lightStyle,
             rflashMode,
             flashModeText,
@@ -24,7 +26,7 @@ export default class Light extends Component {
         } = this.props
 
         return <TouchableOpacity style={lightContainerStyle} onPress={this.onChangeFlashMode}>
-            <View style={[styles.lightBtn, lightStyle]}>
+            <View style={[styles.lightBtn, lightStyle, style]}>
                 <Icon name={rflashMode ? 'light-on' : 'light-off'} color='#fff' size={28} />
             </View>
             {

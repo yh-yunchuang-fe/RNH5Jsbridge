@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {View, Animated, Alert, Easing, Image} from 'react-native'
-import { Toast } from 'gingko'
-import { RNCamera } from 'react-native-camera'
+import {Toast} from 'gingko'
+import {RNCamera} from 'react-native-camera'
 import styles from './style'
 import ScanMask from '../../components/ScanMask'
 import OperateBar from '../../components/OperateBar'
@@ -94,15 +94,6 @@ export default class YHCamera extends Component {
         Toast.hide()
         const { onCameraReady } = this.props
         onCameraReady && onCameraReady()
-    }
-
-    // 点击手电筒
-    onChangeFlashMode = () => {
-        const {flashMode, onChangeFlashMode} = this.props
-
-        if (!!onChangeFlashMode) {
-            onChangeFlashMode(!flashMode)
-        }
     }
 
     // 图像生成
@@ -216,7 +207,7 @@ export default class YHCamera extends Component {
                     rflashMode={!!rflashMode}
                     onCancel={this.onCancel}
                     takePicture={this.takePicture}
-                    onChangeFlashMode={this.onChangeFlashMode}
+                    onChangeFlashMode={onChangeFlashMode}
                     />}
             </View>
         )
