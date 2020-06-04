@@ -1,6 +1,6 @@
 {
   "name": "@yh-rn/yh-common-utils",
-  "version": "0.1.6-alpha.0",
+  "version": "0.1.15-alpha.0",
   "description": "yh utils gather",
   "keywords": [
     "yh",
@@ -9,15 +9,15 @@
   "author": "yh-rn",
   "homepage": "https://github.com/yh-yunchuang-fe/RNH5Jsbridge/tree/readme#readme",
   "license": "ISC",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "directories": {
-    "src": "src"
+    "lib": "lib"
   },
   "files": [
-    "src"
+    "lib"
   ],
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "../../node_modules/.bin/babel --root-mode upward src -d lib"
   },
   "repository": {
     "type": "git",
