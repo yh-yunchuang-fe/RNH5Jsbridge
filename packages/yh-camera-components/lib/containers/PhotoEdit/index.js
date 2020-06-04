@@ -26,7 +26,6 @@ export default class PhotoEdit extends Component {
     render() {
         const { photoButton, isFront, photo, onCancel, onConfirm, 
             onRephotograph, onLoadStart, onLoadEnd } = this.props
-        const confirmStyle = photoButton && { color: '#FD7622' }
         const transformStyle = !isFront && {transform: [{rotateZ: '90deg'}]}
         
         return (
@@ -49,7 +48,7 @@ export default class PhotoEdit extends Component {
                     <TouchableOpacity
                         style={styles.photoTextWrapper}
                         onPress={photoButton ? onConfirm : onCancel}>
-                        <Text style={[styles.photoCancelText, confirmStyle, transformStyle]}>
+                        <Text style={[styles.photoCancelText, transformStyle]}>
                             确认 {/* {photoButton ? '使用照片' : '返回'} */}
                         </Text>
                     </TouchableOpacity>

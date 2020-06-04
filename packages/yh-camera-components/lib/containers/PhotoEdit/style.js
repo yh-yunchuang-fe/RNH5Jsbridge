@@ -34,7 +34,7 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     photoCancelText: {
-        color: '#fff',
+        color: '#FD7622',
         fontSize: 16
     },
     photoRephotograph: {
