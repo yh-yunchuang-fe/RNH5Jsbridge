@@ -1,6 +1,6 @@
 {
   "name": "@yh-rn/yh-rn-jsbridge",
-  "version": "0.1.16-alpha.0",
+  "version": "0.1.18-alpha.0",
   "description": "yh rn h5 jsbridge",
   "keywords": [
     "yh",
@@ -22,7 +22,7 @@
     "build": "../../node_modules/.bin/babel --root-mode upward src -d lib"
   },
   "dependencies": {
-    "@yh-rn/yh-common-utils": "^0.1.15-alpha.0"
+    "@yh-rn/yh-common-utils": "^0.1.18-alpha.0"
   },
   "repository": {
     "type": "git",
