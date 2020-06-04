@@ -46,7 +46,7 @@ export default class PhotoEdit extends React.Component {
                         style={styles.photoTextWrapper}
                         onPress={photoButton ? onConfirm : onCancel}>
                         <Text style={[styles.photoCancelText, confirmStyle, transformStyle]}>
-                            {photoButton ? '使用照片' : '返回'}
+                            确认 {/* {photoButton ? '使用照片' : '返回'} */}
                         </Text>
                     </TouchableOpacity>
                 </View>
