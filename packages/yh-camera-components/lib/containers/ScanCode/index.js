@@ -1,7 +1,15 @@
+/*
+ * @Author: wudi
+ * @Date: 2021-09-06 18:22:56
+ * @LastEditTime: 2021-09-06 18:30:21
+ * @LastEditors: wudi
+ * @Description: In User Settings Edit
+ * @FilePath: /RNH5Jsbridge/packages/yh-camera-components/lib/containers/ScanCode/index.js
+ */
 import React, {Component} from 'react'
 import { View, ScrollView, Keyboard, TextInput } from 'react-native'
 import { Button } from 'gingko'
-import { Header } from 'yh-durian'
+import { Header } from '../../components'
 import styleVariables from '../../assets/style/variables'
 import styles from './style'
 
