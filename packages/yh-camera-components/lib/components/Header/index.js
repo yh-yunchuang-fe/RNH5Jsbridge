@@ -1,14 +1,14 @@
 /*
  * @Author: wudi
  * @Date: 2021-09-06 18:28:17
- * @LastEditTime: 2021-09-06 18:34:45
- * @LastEditors: wudi
+ * @LastEditTime: 2021-09-07 13:59:39
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /RNH5Jsbridge/packages/yh-camera-components/lib/components/Header/index.js
  */
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
-import { Icon } from '@yh-rn/gingko'
+import { Icon } from 'gingko'
 import styles from './style'
 import { withNavigation } from 'react-navigation'
 
