@@ -130,7 +130,7 @@ export default class YHCamera extends Component {
             let scanBarDom = scanBar && scanBar()
             
             if (!React.isValidElement(scanBarDom)) {
-                scanBarDom = (<Image style={styles.scanBar} source={require('../../assets/imgs/scan-line-blue.png')}/>)
+                scanBarDom = (<Image source={require('../../assets/imgs/scanningLine.png')}/>)
             }
             return (<Animated.View style={animatedStyle}>
                     {scanBarDom}

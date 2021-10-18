@@ -1,24 +1,34 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import styleVariables from '../../assets/style/variables'
 
 export default StyleSheet.create({
     scanCodeContainer: {
         flex: 1,
+        backgroundColor: '#FFFFFF'
     },
     scanCodeContent: {
         flex: 1,
-        paddingTop: 25,
-        paddingHorizontal: 40
+        paddingTop: 40,
+        paddingHorizontal: 15,
+    },
+    textInputWrapper: {
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: styleVariables.border_color,
     },
     textInput: {
-        height: 40,
-        borderWidth: 1,
-        borderRadius: styleVariables.radius,
         color: styleVariables.color_base,
-        borderColor: styleVariables.border_color,
-        paddingHorizontal: 12
+        paddingHorizontal: 15,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        ...Platform.select({
+            ios: { lineHeight: 20 },
+            android: {}
+        })
     },
     button: {
-        marginTop: 25
+        height: 48,
+        marginTop: 40,
+        marginHorizontal: 10,
     }
 })

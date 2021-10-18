@@ -1,8 +1,8 @@
 /*
  * @Author: wudi
  * @Date: 2021-09-06 18:22:56
- * @LastEditTime: 2021-09-06 18:30:21
- * @LastEditors: wudi
+ * @LastEditTime: 2021-10-15 15:56:20
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /RNH5Jsbridge/packages/yh-camera-components/lib/containers/ScanCode/index.js
  */
@@ -35,12 +35,14 @@ export default class ScanCode extends Component {
                 style={styles.scanCodeContent}
                 keyboardShouldPersistTaps='handled'
                 bounces={false}>
-                <TextInput
-                    value={pickCode}
-                    style={styles.textInput}
-                    placeholder='输入提货码'
-                    placeholderTextColor={styleVariables.placeholder_color}
-                    onChangeText={this.onChangeText}/>
+                <View style={styles.textInputWrapper}>
+                    <TextInput
+                        value={pickCode}
+                        style={styles.textInput}
+                        placeholder='请输入提货码'
+                        placeholderTextColor={styleVariables.placeholder_color}
+                        onChangeText={this.onChangeText}/>
+                </View>
                 <Button
                     style={styles.button}
                     type='primary'

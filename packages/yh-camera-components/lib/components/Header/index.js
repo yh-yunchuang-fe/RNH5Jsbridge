@@ -1,14 +1,14 @@
 /*
  * @Author: wudi
  * @Date: 2021-09-06 18:28:17
- * @LastEditTime: 2021-09-06 18:34:45
- * @LastEditors: wudi
+ * @LastEditTime: 2021-10-15 17:26:32
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /RNH5Jsbridge/packages/yh-camera-components/lib/components/Header/index.js
  */
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
-import { Icon } from '@yh-rn/gingko'
+import { Icon } from 'gingko'
 import styles from './style'
 import { withNavigation } from 'react-navigation'
 
@@ -17,10 +17,12 @@ class Header extends Component {
     needGoBack: true,
     onBack: null,
     leftView: null,
-    rightView: null
+    rightView: null,
+    centerView: null,
+    style: {},
+    headerStyle: {},
   }
   onBack = () => {
-    // @ts-ignore
     const {
       onBack,
       navigation
@@ -33,19 +35,17 @@ class Header extends Component {
     }
   }
   renderLeftView = () => {
-    const {
-      leftView,
-      needGoBack
-    } = this.props
-
+    const {leftView, needGoBack} = this.props
+    
     if (!!leftView) {
-      return leftView
+        return leftView
     } else {
-      return needGoBack && <TouchableOpacity style={styles.leftBtn} onPress={this.onBack}>
-            <Icon color={'#999'} name='back' size={20} />
-        </TouchableOpacity>
+        return needGoBack && <TouchableOpacity style={styles.leftBtn} onPress={this.onBack}>
+          <Icon color={'#000000'} name='back' size={18} />
+      </TouchableOpacity>
     }
   }
+
   renderRightView = () => {
     const {
       rightView
@@ -57,20 +57,17 @@ class Header extends Component {
   }
 
   render() {
-    // @ts-ignore
-    const {
-      children
-    } = this.props
-    return <View style={styles.header}>
-            <View style={styles.headerContainer}>
-                {this.renderLeftView()}
-                <Text style={styles.title} numberOfLines={1}>{children}</Text>
-                {this.renderRightView()}
-            </View>
-        </View>
-  }
+    const { children, style, headerStyle } = this.props
 
-} // @ts-ignore
+    return <View style={[styles.header, style]}>
+        <View style={[styles.headerContainer, headerStyle]}>
+            {this.renderLeftView()}
+            <Text style={styles.title} numberOfLines={1}>{children}</Text>
+            {this.renderRightView()}
+        </View>
+    </View>
+  }
+}
 
 
 export default withNavigation(Header)

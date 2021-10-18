@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, Dimensions, StyleSheet, TouchableOpacity} from 'react-native'
+import {View, Text, Dimensions, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import styles from './style'
 import { Icon } from 'gingko'
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window')
@@ -15,9 +15,6 @@ export default class ScanMask extends Component {
         borderColor: '#24A8E8',
         borderWidth: StyleSheet.hairlineWidth,
         isShowScanBar: true,
-        cornerSize: 20,
-        cornerColor: '#24A8E8',
-        cornerBorderWidth: 3,
         rflashMode: false,
         goBack: () => {},
         gotoPickCode: () => {},
@@ -36,78 +33,55 @@ export default class ScanMask extends Component {
     
     render() {
         const { 
-            top,
-            width = 250, 
-            height = 250,
+            top = 200,
+            width = 300, 
+            height = 300,
             maskColor,
             rflashMode,
             goBack,
             renderScanBar,
             renderTopView,
             renderBottomView,
-            borderColor, 
-            borderWidth,
-            cornerSize,
-            cornerColor,
-            cornerBorderWidth,
         } = this.props
         const maskSty = maskColor ? { backgroundColor: maskColor } : null
         const scanTop = top ? top : (deviceHeight - height) / 2
         const scanBottom = deviceHeight - scanTop - height
         const scanLeft = (deviceWidth - width) / 2
-        const scanBorderSty = { borderColor, borderWidth }
-        const cornerSty = {
-            width: cornerSize,
-            height: cornerSize,
-            borderColor: cornerColor,
-            borderWidth: cornerBorderWidth
-        }
 
         return (
             <View style={styles.scanMaskContainer}>
-                <View style={[styles.sideView, maskSty, { height: scanTop }]}>
+                <View style={maskSty}>
                     {
                         !!renderTopView ? renderTopView() :
-                        <View style={styles.topContainer}>
-                            <View style={styles.btnContainer}>
-                                <TouchableOpacity onPress={goBack}>
-                                    <View style={styles.backBtn}>
-                                        <Icon name='chevron-left' color='#fff' />
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={styles.topTipText}>将条形码／二维码放入框内</Text>
-                        </View>
+                        <TouchableOpacity style={styles.backBtn} onPress={goBack}>
+                            <Icon name='chevron-left' color='#fff' />
+                        </TouchableOpacity>
                     }
                 </View>
 
-                <View style={styles.center}>
-                    <View style={[styles.sideView, maskSty, { width: scanLeft }]}/>
-                    <View style={[styles.scanWrap, { width, height }, scanBorderSty]}>
-                        <View style={[cornerSty, styles.cornerTopLeft]}/>
-                        <View style={[cornerSty, styles.cornerTopRight]}/>
-                        <View style={[cornerSty, styles.cornerBottomLeft]}/>
-                        <View style={[cornerSty, styles.cornerBottomRight]}/>
+                <View style={[styles.scanMaskContent ,maskSty]}>
+                    <View style={styles.center}>
+                        <View style={[maskSty, { width: scanLeft, height }]}/>
                         {renderScanBar && renderScanBar()}
-                    </View>
-                    <View style={[styles.sideView, maskSty, { width: scanLeft }]}/>
-                </View>
 
-                <View style={[styles.sideView, maskSty, { height: scanBottom }]}>
+                        <View style={[maskSty, { width: scanLeft }]}/>
+                    </View>
+
+                    <Text style={styles.topTipText}>对准条形码／二维码进行识别</Text>
+
                     {
                         renderBottomView ? renderBottomView() :
-                        <View>
-                            <TouchableOpacity style={styles.lightBtnContainer} onPress={this.onChangeFlashMode}>
-                                <View style={styles.lightBtn}>
-                                    <Icon name={rflashMode ? 'light-on' : 'light-off'} color='#fff' size={28} />
-                                </View>
-                                <Text style={styles.lightBtnText}>{rflashMode ? '关闭手电筒' : '打开手电筒'}</Text>
+                        <View style={styles.foterWrap}>
+                            <TouchableOpacity style={styles.btnContainer} onPress={this.gotoPickCode} activeOpacity={1}>
+                                <Image style={styles.btnImage} source={require('../../assets/imgs/pickUpCode.png')} />
+
+                                <Text style={styles.btnText}>输入提货码</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={this.gotoPickCode}>
-                                <View style={styles.pickCodeButton}>
-                                    <Text style={styles.pickCodeButtonText}>输入提货码</Text>
-                                </View>
+                            <TouchableOpacity style={styles.btnContainer} onPress={this.onChangeFlashMode} activeOpacity={1}>
+                                <Image style={styles.btnImage} source={rflashMode ? require('../../assets/imgs/flashOn.png') : require('../../assets/imgs/flashOff.png')} />
+
+                                <Text style={styles.btnText}>{rflashMode ? '关闭手电筒' : '打开手电筒'}</Text>
                             </TouchableOpacity>
                         </View>
                     }
